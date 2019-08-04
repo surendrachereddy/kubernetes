@@ -1,0 +1,10 @@
+apiVersion : v1
+kind: ConfigMap
+metadata:
+  name: testPod
+  labels:
+    app: test
+data:
+  dd: d
+  d: D
+
