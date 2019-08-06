@@ -1,2 +1,32 @@
 
-Pods of Namespace Kube-system ->  kubectl get pods -n kube-system
+------------------------------------------------------------------
+Basic Commands:
+
+All Pods              -> kubectl get pods
+Namespace Kube-system -> kubectl get pods -n kube-system
+Everything            -> kubectl get all
+Describe              -> kubectl describe pod myapp-pod
+Create a object       -> Kubectl apply -f filename.yaml
+Edit a Object         -> Kubectl edit -f filename.yaml
+Without YML File      -> kubectl run nginx --image=nginx (creates deployment By Default)
+Without YML File(pod) -> kubectl run nginx --image=nginx --generator run-Pod/v1 nginx
+Manifest file         -> kubectl run nginx --image=nginx --dry-run -o yaml
+(for testing)
+------------------------------------------------------------------
+ReplicaSet:
+
+Create               -> kubectl create –f replicaset-definition.yml
+Get                  -> kubectl get replicaset
+Delete               -> kubectl delete replicaset myapp-replicaset    *Also deletes all underlying PODs
+Scale                -> kubectl replace -f replicaset-definition.yml
+Scale                -> kubectl scale –replicas=6 -f replicaset-definition.yml
+------------------------------------------------------------------
+Deployment:
+
+Create               -> kubectl create –f deployment-definition.yml
+Get                  -> kubectl get deployments
+-----[Deployment Rollouts]------
+Rollout Status       -> kubectl rollout status deployment/myapp-deployment
+Rollout History      -> kubectl rollout history deployment/myapp-deployment
+Undo Deployment      -> kubectl rollout undo deployment/myapp-deployment
+------------------------------------------------------------------
