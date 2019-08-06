@@ -1,0 +1,2 @@
+
+Pods of Namespace Kube-system ->  kubectl get pods -n kube-system
