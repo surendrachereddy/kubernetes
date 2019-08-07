@@ -7,3 +7,9 @@ spec:
   containers:
     - name: redis
       image: redis123
+      ports:
+        - containerPort: 8080
+      env:
+        - name: APP_ENV
+          value: pink
+

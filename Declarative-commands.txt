@@ -15,6 +15,9 @@ Describe              -> kubectl describe pod myapp-pod
 Create a object       -> Kubectl apply -f filename.yaml
 Edit a Object         -> Kubectl edit -f filename.yaml
 
+Secrets  Encode       ->  echo –n ‘value to be encoded’ | base64
+Secrets  Decode       ->  echo –n ‘bXlzcWw=’ | base64 --decode
+
 ============================================================================================================
 
 ReplicaSet:

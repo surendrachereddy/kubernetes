@@ -1,0 +1,63 @@
+apiVersion : v1
+kind: Pod
+metadata:
+  name: redis
+spec:
+  containers:
+    - name: redis
+      image: redis123
+
+---
+#Config-Map
+
+apiVersion : v1
+kind: Pod
+metadata:
+  name: redis
+  namespace: dev
+spec:
+  containers:
+    - name: redis
+      image: redis123
+      ports:
+        - containerPort: 8080
+      envFrom:
+        - configMapRef:
+            name: NameofConfiMap
+
+
+    # or
+    env:
+      - name: NAme of env variable
+        valueFrom:
+          configMapKeyRef:
+            - name: NameofConfiMap
+              key: name of value key
+
+
+
+---
+#Secret
+
+apiVersion : v1
+kind: Pod
+metadata:
+  name: redis
+  namespace: dev
+spec:
+  containers:
+    - name: redis
+      image: redis123
+      ports:
+        - containerPort: 8080
+      env:
+        - name: NAme of env variable
+          valueFrom:
+            secretKeyRef:
+              - name: Nameofsecret
+                key: name of value key
+#or
+      envFrom:
+        - secretRef:
+            name: Nameofsecret
+
