@@ -6,6 +6,10 @@ Basic Commands:
 
 All Pods              -> kubectl get pods
 Namespace Kube-system -> kubectl get pods -n kube-system
+
+Filter Objects based  -> kubectl get pods --selector app=nginx,app2=dddd
+on  Label
+
 Everything            -> kubectl get all
 Describe              -> kubectl describe pod myapp-pod
 Create a object       -> Kubectl apply -f filename.yaml
@@ -66,5 +70,13 @@ ClusterIP             -> Service Creates a Virtual IP inside Cluster for Communi
 LoadBalancer          -> It Provisions a Loadbalancer for Cluster-based on Cloud-Provider
 
 Get                   -> kubectl get services or sv
+
+============================================================================================================
+Daemonsets:
+---------
+It runs one COPY of Pod on each in CLuster. It ensures one copy of POD ex: Monitoring agent, Logs Viewer
+
+Get                   -> kubectl get daemonsets
+Describe              -> kubectl describe daemonsets monitoring-daemon
 
 ============================================================================================================

@@ -1,0 +1,23 @@
+============================================================================================================
+How scheduling works:
+-------------------
+By Default nodeName Field in Pod-Definition, If we dont define it, Kubernetes will add it
+
+1. Scheduler                              -----> Search for Pods where nodeName is not set
+
+2. If a Pod with a no nodeName is found   -----> Scheduler will run its algorithm to assign a node to the Pod
+
+3. If Scheduler is not installed          -----> Pods Status will be in "Pending" State
+
+4. Manually Specify the nodeName in YML  to dicard the Scheduler assignment "Only at the time of POD Creation"
+
+
+============================================================================================================
+Resource Requirements and Limits:
+-------------------
+1. Amount of resources avaliable on POD to the Resource avaliable on NODE
+
+2. Whenever a POD is placed on a Node it consumes certain resource. By Default Kubernetes assumes POD requires
+   0.5 CPU, 256 Mi. We can set a Limit on how much resource can be used
+============================================================================================================
+

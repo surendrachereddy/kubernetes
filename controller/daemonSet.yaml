@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: DaemonSet
+metadata:
+  name: rc
+  labels:
+    app: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      name: rc-pod
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis

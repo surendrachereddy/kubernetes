@@ -1,0 +1,17 @@
+============================================================================================================
+Monitoring:
+----------
+1.MetricsServer     ---> Retrieves metric from Nodes and Pods and Stores them IN-Memory
+
+  Commands: kubectl top node   /  kubectl top pod
+2.Prometheus
+3.Elastic Stack
+4.DataDog
+5.Dynatrace
+
+============================================================================================================
+Logging :
+----------
+Stream Live     -> kubectl logs -f podName
+
+============================================================================================================

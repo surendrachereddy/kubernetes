@@ -5,6 +5,9 @@ metadata:
 
 spec:
   replicas: 3
+  strategy:
+    rollingUpdate:
+
   selector:
     matchLabels:
       app: nginx
