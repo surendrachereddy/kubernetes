@@ -1,6 +1,8 @@
 
-------------------------------------------------------------------
+============================================================================================================
+
 Basic Commands:
+----------
 
 All Pods              -> kubectl get pods
 Namespace Kube-system -> kubectl get pods -n kube-system
@@ -8,25 +10,101 @@ Everything            -> kubectl get all
 Describe              -> kubectl describe pod myapp-pod
 Create a object       -> Kubectl apply -f filename.yaml
 Edit a Object         -> Kubectl edit -f filename.yaml
-Without YML File      -> kubectl run nginx --image=nginx (creates deployment By Default)
-Without YML File(pod) -> kubectl run nginx --image=nginx --generator run-Pod/v1 nginx
-Manifest file         -> kubectl run nginx --image=nginx --dry-run -o yaml
-(for testing)
-------------------------------------------------------------------
+
+============================================================================================================
+
+Imperative Commands:
+----------
+
+--dry-run             ->  By default as soon as the command is run, the resource will be created.
+                          If you simply want to test your command , use the --dry-run option.
+                          This will not create the resource,instead, tell you weather the resource can be created
+                          and if your command is right.
+
+-o yaml               -> This will output the resource definition in YAML format on screen.
+-l                    -> labels
+-------------------------------------------------------------------------------------------------------------
+POD:
+Create an NGINX Pod   -> kubectl run --generator=run-pod/v1 nginx --image=nginx -l tier=db
+Generate POD Manifest -> kubectl run --generator=run-pod/v1 nginx --image=nginx --dry-run -o yaml
+YAML file (-o yaml).
+-------------------------------------------------------------------------------------------------------------
+Deployment:
+Create a deployment   -> kubectl run --generator=deployment/v1beta1 nginx --image=nginx
+                         or kubectl create deployment --image=nginx nginx
+Generate Deployment   -> kubectl run --generator=deployment/v1beta1 nginx --image=nginx --dry-run -o yaml
+YAML file
+
+Generate Deployment   -> kubectl run nginx --image=nginx --dry-run --replicas=4 -o yaml
+YAML file with 4
+Replicas
+
+Save it to a file     -> kubectl run  nginx --image=nginx --dry-run --replicas=4 -o yaml > nginx-deployment.yaml
+-------------------------------------------------------------------------------------------------------------
+Service:
+Create a Service      -> kubectl expose pod redis --port=6379 --name redis-service --dry-run -o yaml
+(redis-service of type    or kubectl create service clusterip redis --tcp=6379:6379 --dry-run -o yaml
+ClusterIP to expose
+pod redis on port 6379)
+
+NodePort              -> kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run -o yaml
+
+
+
+============================================================================================================
+
 ReplicaSet:
+----------
 
 Create               -> kubectl create –f replicaset-definition.yml
 Get                  -> kubectl get replicaset
 Delete               -> kubectl delete replicaset myapp-replicaset    *Also deletes all underlying PODs
 Scale                -> kubectl replace -f replicaset-definition.yml
 Scale                -> kubectl scale –replicas=6 -f replicaset-definition.yml
-------------------------------------------------------------------
+
+============================================================================================================
+
 Deployment:
+----------
 
 Create               -> kubectl create –f deployment-definition.yml
 Get                  -> kubectl get deployments
------[Deployment Rollouts]------
 Rollout Status       -> kubectl rollout status deployment/myapp-deployment
 Rollout History      -> kubectl rollout history deployment/myapp-deployment
 Undo Deployment      -> kubectl rollout undo deployment/myapp-deployment
-------------------------------------------------------------------
+
+============================================================================================================
+
+NameSpace:
+---------
+
+Namespace Kube-system   -> kubectl get pods -n kube-system or kubectl get pods --namespace=kube-system
+All Namespaces          -> kubectl get pods --all-namespaces
+                        -> kubectl get namespace
+Create a NameSpace      -> kubectl create -f file.yaml
+Create a object         -> Kubectl apply -f filename.yaml -n dev (this will create a Object in dev Namespace)
+
+Default Namepace  is    -> Kubectl config set-context ${Kubectl config current-context} --namespace=dev
+default-namespace.To
+switch namespace on demand
+
+To Allocate Resource    -> see compute yaml
+to a namespace
+
+NameSpace Format        -> db-service.dev.svc.cluster.local
+                        -> ServiceName. NameSpaceName.Service.Domain
+
+============================================================================================================
+
+Service:
+---------
+NodePort              -> Service listens to a port on Node and Forwards Requests to Underlying Pods
+                         i.e it makes internal Pod Accessible to Node
+
+ClusterIP             -> Service Creates a Virtual IP inside Cluster for Communication between services
+
+LoadBalancer          -> It Provisions a Loadbalancer for Cluster-based on Cloud-Provider
+
+Get                   -> kubectl get services or sv
+
+============================================================================================================
